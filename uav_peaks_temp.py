@@ -53,6 +53,7 @@ def main():
     cnt = 0
 
     for img in args.tif:
+        plot = img.split('/')[-2]
         cnt += 1
         g_img = gdal.Open(img)
         a_img = g_img.GetRasterBand(1).ReadAsArray()
@@ -73,7 +74,8 @@ def main():
         diff = abs(float(plot_temp) - float(plant_temp))
 
         temps_dict[cnt] = {
-                'filename': os.path.basename(img),
+                'date': args.date,
+                'filename': plot,
                 'plot_temp': plot_temp,
                 'plant_temp': plant_temp,
                 'plot_plant_diff': diff
