@@ -57,11 +57,12 @@ def process_image(img):
     temps_dict = {}
     cont_cnt = 0
 
-    plot = img.split('/')[-2]
+
     sigma = float(1)
     df = pd.DataFrame()
 
     try:
+        plot = img.split('/')[-2]
         cont_cnt += 1
         #image = skimage.io.imread(fname=img)
         a_img = tifi.imread(img)
