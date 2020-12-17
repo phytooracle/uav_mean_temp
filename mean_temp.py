@@ -17,6 +17,7 @@ import skimage.filters
 import skimage.io
 import multiprocessing
 import warnings
+import tifffile as tifi
 warnings.filterwarnings("ignore")
 
 
@@ -62,7 +63,10 @@ def process_image(img):
 
     try:
         cont_cnt += 1
-        image = skimage.io.imread(fname=img)
+        #image = skimage.io.imread(fname=img)
+        a_img = tifi.imread(img)
+        a_img = np.array(a_img)
+        image = a_img[~np.isnan(a_img)]
         blur = skimage.color.rgb2gray(image)
         blur = skimage.filters.gaussian(image, sigma=sigma)
         t = skimage.filters.threshold_otsu(blur)
@@ -80,6 +84,7 @@ def process_image(img):
         soil_temp = np.nanmean(sel2)
         plant_temp = np.nanmean(sel)
         img_temp = np.nanmean(image)
+        print(soil_temp)
 
         print(f'Soil temp: {soil_temp}\nPlant temp: {plant_temp}\n')
 
