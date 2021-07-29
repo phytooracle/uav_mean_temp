@@ -68,7 +68,8 @@ def process_image(img):
         a_img = tifi.imread(img)
         a_img = np.array(a_img)
         image = a_img[~np.isnan(a_img)]
-        blur = skimage.color.rgb2gray(image)
+        #blur = skimage.color.rgb2gray(image)
+        blur = skimage.color.gray2rgb(image)
         blur = skimage.filters.gaussian(image, sigma=sigma)
         t = skimage.filters.threshold_otsu(blur)
 
